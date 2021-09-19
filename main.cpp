@@ -1,9 +1,9 @@
 #include<ctype.h>
 #include<string.h>
-#include<stack> 
 #include<iostream>
 #include<fstream>
 #include<cassert>
+#include<stack> 
 using namespace std;
 #define MAX 100000 
 int n=0,level;
@@ -13,7 +13,7 @@ int ifelsen=0,ifelseifn=0;
 stack<int> st;
 struct key   //结构体数组,关键字按顺序排列
 {
- char *word;
+ const char *word;
  int count;
 } keytab[] = {
 "auto",0,"break",0,"case",0,"char",0,"const",0,
@@ -117,7 +117,7 @@ void count(){
 			if((strcmp(keytab[m].word,"if")!=0||wordflag==1)&&strcmp(word0,"else")==0)
 		    pop0();        //遇到else出栈 
 			
-			strcpy(word0,keytab[m].word);
+			strcpy_s(word0,keytab[m].word);
 			}
 			wordflag=0;	//还原 wordflag
 		} 
