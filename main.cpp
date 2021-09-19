@@ -1,4 +1,9 @@
-#include<bits/stdc++.h>
+#include<ctype.h>
+#include<string.h>
+#include<stack> 
+#include<iostream>
+#include<fstream>
+#include<cassert>
 using namespace std;
 #define MAX 100000 
 int n=0,level;
