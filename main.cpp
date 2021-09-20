@@ -25,8 +25,7 @@ struct key   //结构体数组,关键字按顺序排列
 "union",0,"unsigned",0,"void",0,"volatile",0,"while",0,
 };
 
-//关键字的个数等于数组的长度除以单个元素的长度
-#define NKEYS (sizeof keytab / sizeof(struct key))
+#define NKEYS 32
 
 int j=0;
 int getword(char *word, int lim){
