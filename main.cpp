@@ -8,6 +8,7 @@ using namespace std;
 #define MAX 100000 
 int n=0,level;
 char a[100000];
+int switchnum;
 int casenum[100],casen=0;
 int ifelsen=0,ifelseifn=0;
 stack<int> st;
@@ -104,7 +105,8 @@ void count(){
 			if(strcmp(key[m],"case")==0)
 			casenum[casen]++;
 			if(strcmp(key[m],"switch")==0)
-		    casen++;
+		    {casen++;switchnum++;
+			}
 			
 			if(strcmp(key[m],"if")==0&&(strcmp(word0,"else")!=0||wordflag==1))
 		    st.push(1);    //记录if为1  else if为2  else为3
@@ -123,9 +125,9 @@ void count(){
 
     cout<<"total num:"<<sum<<endl;
     if(level>=2){
-	cout<<"switch num:"<<keytab[25].count<<endl;
+	cout<<"switch num:"<<switchnum<<endl;
     cout<<"case num:";
-    for(int k=1;k<=keytab[25].count;k++)
+    for(int k=1;k<=switchnum;k++)
     cout<<casenum[k]<<" ";
     cout<<endl;
  }
