@@ -108,12 +108,12 @@ void count(){
 			
 			if(strcmp(key[m],"if")==0&&(strcmp(word0,"else")!=0||wordflag==1))
 		    st.push(1);    //记录if为1  else if为2  else为3
-			if(strcmp(keytab[m].word,"if")==0&&strcmp(word0,"else")==0&&wordflag==0)
+			if(strcmp(key[m],"if")==0&&strcmp(word0,"else")==0&&wordflag==0)
 		    st.push(2);  
-			if((strcmp(keytab[m].word,"if")!=0||wordflag==1)&&strcmp(word0,"else")==0)
+			if((strcmp(key[m],"if")!=0||wordflag==1)&&strcmp(word0,"else")==0)
 		    pop0();        //遇到else出栈 
 			
-			strcpy_s(word0,keytab[m].word);
+			strcpy_s(word0,key[m]);
 			}
 			wordflag=0;	//还原 wordflag
 		} 
