@@ -19,10 +19,10 @@ const char * key[] ={
 "goto","if","int","long","register",
 "return","short","signed","sizeof",
 "static","struct","switch","typedef",
-"union","unsigned","void","volatile","while"} ;//结构体数组,关键字按顺序排列
+"union","unsigned","void","volatile","while"} ;
+//const char*型数组,关键字按顺序排列
 
-
-//关键字的个数等于数组的长度除以单个元素的长度
+//共32个关键字需要统计 
 #define NKEYS 32
 
 int j=0;
@@ -153,7 +153,7 @@ void readtxt(string file)
         a[n++]=c;
     }
 	infile.close();    //关闭文件输入流   
-    count();         
+    count();          
 }
 
 int main(){
