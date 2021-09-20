@@ -7,11 +7,11 @@
 using namespace std;
 #define MAX 100000 
 int n=0,level;
-char a[100000];
-int switchnum;
-int casenum[100],casen=0;
-int ifelsen=0,ifelseifn=0;
-stack<int> st;
+char a[MAX];//存储一个单词，大小在100000字符以内 
+int switchnum; //记录swtich个数的变量 
+int casenum[100],casen=0;//记录case个数的变量 
+int ifelsen=0,ifelseifn=0;//记录if-else个数以及if-elseif-else个数的变量 
+stack<int> st;//堆栈实现if else elseif的匹配问题 
 const char * key[] ={
 "auto","break","case","char","const",
 "continue","default","do","double",
@@ -79,11 +79,11 @@ void pop0(){
 			flag=1;
 		}
 		if(p==1){
-			if(flag==1){
+			if(flag==1){//if 和 else 中间夹杂有elseif 
 				ifelseifn++;
 				flag=0;break; 
 			}		   
-		    if(flag==0){
+		    if(flag==0){//if 和 else 中间没有夹杂elseif 
 			    ifelsen++;break;
 			}	    		
 		}	
