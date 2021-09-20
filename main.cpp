@@ -1,9 +1,9 @@
 #include<ctype.h>
 #include<string.h>
+#include<stack> 
 #include<iostream>
 #include<fstream>
 #include<cassert>
-#include<stack> 
 using namespace std;
 #define MAX 100000 
 int n=0,level;
@@ -11,20 +11,17 @@ char a[100000];
 int casenum[100],casen=0;
 int ifelsen=0,ifelseifn=0;
 stack<int> st;
-struct key   //结构体数组,关键字按顺序排列
-{
- const char *word;
- int count;
-} keytab[] = {
-"auto",0,"break",0,"case",0,"char",0,"const",0,
-"continue",0,"default",0,"do",0,"double",0,
-"else",0,"enum",0,"extern",0,"float",0,"for",0,
-"goto",0,"if",0,"int",0,"long",0,"register",0,
-"return",0,"short",0,"signed",0,"sizeof",0,
-"static",0,"struct",0,"switch",0,"typedef",0,
-"union",0,"unsigned",0,"void",0,"volatile",0,"while",0,
-};
+const char * key[] ={
+"auto","break","case","char","const",
+"continue","default","do","double",
+"else","enum","extern","float","for",
+"goto","if","int","long","register",
+"return","short","signed","sizeof",
+"static","struct","switch","typedef",
+"union","unsigned","void","volatile","while"} ;//结构体数组,关键字按顺序排列
 
+
+//关键字的个数等于数组的长度除以单个元素的长度
 #define NKEYS 32
 
 int j=0;
@@ -53,7 +50,7 @@ int getword(char *word, int lim){
 
 /* binsearch:  find word in tab[0]...tab[n-1] */
 //折半查找
-int binsearch(char *word, struct key tab[], int n)
+int binsearch(char *word, int n)
 {
     int cond;
     int low, high, mid;
@@ -62,7 +59,7 @@ int binsearch(char *word, struct key tab[], int n)
     while (low <= high)
  {
         mid = (low+high) / 2;
-        if ((cond = strcmp(word, tab[mid].word)) < 0)
+        if ((cond = strcmp(word, key[mid])) < 0)
             high = mid - 1;
         else if (cond > 0)
             low = mid + 1;
@@ -94,22 +91,22 @@ void pop0(){
 
 
 void count(){
-    int m;int wordflag=0;
+    int m;int wordflag=0;int sum=0;
     char word[MAX],word0[MAX];//word0记录上一个单词 
     for(int i=0;i<n;i++)
 {
     getword(word, MAX);
     if (isalpha(word[0])) //word的第一个为字母
         {
-		if ((m = binsearch(word, keytab, NKEYS)) >= 0)
-            {keytab[m].count++;//在结构体中查找成功，关键字计数加1
+		if ((m = binsearch(word, NKEYS)) >= 0)
+            {sum++;//在结构体中查找成功，关键字计数加1
             
-			if(strcmp(keytab[m].word,"case")==0)
+			if(strcmp(key[m],"case")==0)
 			casenum[casen]++;
-			if(strcmp(keytab[m].word,"switch")==0)
+			if(strcmp(key[m],"switch")==0)
 		    casen++;
 			
-			if(strcmp(keytab[m].word,"if")==0&&(strcmp(word0,"else")!=0||wordflag==1))
+			if(strcmp(key[m],"if")==0&&(strcmp(word0,"else")!=0||wordflag==1))
 		    st.push(1);    //记录if为1  else if为2  else为3
 			if(strcmp(keytab[m].word,"if")==0&&strcmp(word0,"else")==0&&wordflag==0)
 		    st.push(2);  
@@ -123,10 +120,7 @@ void count(){
 	else wordflag=1;//记录上一个word为非字母 
  }
  //统计结束，打印结果
-    int sum=0;
-    for (int i = 0; i < NKEYS;i++){
-	sum+=keytab[i].count;
- }
+
     cout<<"total num:"<<sum<<endl;
     if(level>=2){
 	cout<<"switch num:"<<keytab[25].count<<endl;
