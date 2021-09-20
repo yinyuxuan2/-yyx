@@ -113,7 +113,7 @@ void count(){
 			if((strcmp(key[m],"if")!=0||wordflag==1)&&strcmp(word0,"else")==0)
 		    pop0();        //遇到else出栈 
 			
-			strcpy_s(word0,key[m]);
+			strcpy(word0,key[m]);
 			}
 			wordflag=0;	//还原 wordflag
 		} 
